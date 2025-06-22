@@ -47,19 +47,28 @@ pipeline {
     }
 
     post {
-        always {
-            dir("${env.WORKSPACE}/Ch05/05_02-publish-reports"){
-                sh 'venv/bin/coverage xml'
-            }
+    always {
+        dir("${env.WORKSPACE}/Ch05/05_02-publish-reports") {
+            // Generate coverage XML
+            sh 'venv/bin/coverage xml'
 
-            junit allowEmptyResults: true, testResults: '**/pytest_junit.xml'
+            // Publish test results (pytest)
+            junit allowEmptyResults: true, testResults: 'pytest_junit.xml'
 
-            junit allowEmptyResults: true, testResults: '**/pylint_junit.xml'
+            // Publish pylint results (if generated)
+            junit allowEmptyResults: true, testResults: 'pylint_junit.xml'
 
-           publishCoverage adapters: [
-    coberturaAdapter(pattern: '**/coverage.xml')
-], sourceFileResolver: sourceFiles('STORE_LAST_BUILD')
+            // Code coverage (either use A or B below)
+            
+            // Option A: If you have the Coverage plugin installed
+            publishCoverage adapters: [
+                coberturaAdapter(pattern: 'coverage.xml')
+            ], sourceFileResolver: sourceFiles('STORE_LAST_BUILD')
 
+            // Option B: If coberturaAdapter gives error (use this instead)
+            // recordCoverage tools: [cobertura(pattern: 'coverage.xml')]
         }
     }
+}
+
 }
