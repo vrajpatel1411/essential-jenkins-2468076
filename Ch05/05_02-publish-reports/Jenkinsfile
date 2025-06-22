@@ -58,15 +58,15 @@ pipeline {
             // Publish pylint results (if generated)
             junit allowEmptyResults: true, testResults: 'pylint_junit.xml'
 
-            // Code coverage (either use A or B below)
+            // // Code coverage (either use A or B below)
             
-            // Option A: If you have the Coverage plugin installed
-            publishCoverage adapters: [
-                coberturaAdapter(pattern: 'coverage.xml')
-            ], sourceFileResolver: sourceFiles('STORE_LAST_BUILD')
+            // // Option A: If you have the Coverage plugin installed
+            // publishCoverage adapters: [
+            //     coberturaAdapter(pattern: 'coverage.xml')
+            // ], sourceFileResolver: sourceFiles('STORE_LAST_BUILD')
 
-            // Option B: If coberturaAdapter gives error (use this instead)
-            // recordCoverage tools: [cobertura(pattern: 'coverage.xml')]
+            // // Option B: If coberturaAdapter gives error (use this instead)
+            // // recordCoverage tools: [cobertura(pattern: 'coverage.xml')]
         }
     }
 }
