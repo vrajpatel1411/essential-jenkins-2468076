@@ -67,7 +67,8 @@ pipeline {
             sh 'ls -lh coverage.xml && head -n 10 coverage.xml'
 
             // // Option B: If coberturaAdapter gives error (use this instead)
-             recordCoverage tools: [cobertura(pattern: 'coverage.xml')]
+             recordCoverage tools: [[adapter: 'cobertura', pattern: 'coverage.xml']]
+
         }
     }
 }
