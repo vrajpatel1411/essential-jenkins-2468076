@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    // tools {
-    //     maven 'Maven-3.9.10'
-    // }
+    tools {
+        maven 'Maven-3.9.10'
+    }
     // Add a tool configuration here...
     stages {
         stage('Source') {
