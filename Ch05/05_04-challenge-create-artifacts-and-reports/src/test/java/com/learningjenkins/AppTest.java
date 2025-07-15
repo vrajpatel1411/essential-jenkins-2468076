@@ -13,6 +13,6 @@ public class AppTest
     public void CheckHelloWorld()
     {
         App app = new App();
-        assertEquals( "Hello Wo!", app.main() );
+        assertEquals( "Hello World!", app.main() );
     }
 }
